@@ -98,6 +98,7 @@ import { useEffect } from "react";
 import type { LoaderFunction } from "@remix-run/node";
 import { useNavigate } from "@remix-run/react";
 import Countdown from "react-countdown";
+import { Button } from "@chakra-ui/react";
 const { start } = require("~/components/animatedText");
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -176,12 +177,17 @@ export default function Landing() {
           </textPath>
         </text>
       </svg>
-      <div className="content"></div>
-      <button className="enter">
-        <div className="enter__bg"></div>
+      {/* <div className="content"></div> */}
+      <Button
+        bg="#d6ae7c"
+        color="#000"
+        borderRadius={99}
+        height="100px"
+        width="100px"
+      >
         <Countdown className="enter__text" date="2022-05-07T17:00:00" />
         {/* <span className="enter__text">Enter</span> */}
-      </button>
+      </Button>
     </main>
   );
 }

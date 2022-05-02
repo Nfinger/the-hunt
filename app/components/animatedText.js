@@ -112,10 +112,11 @@ class Intro {
 
     gsap.to(this.DOM.circleText, {
       delay: 2,
-      duration: 6,
+      duration: 800,
       repeat: 99,
+      repeatDelay: 0,
       ease: "power4",
-      rotate: "+=180",
+      rotate: "+=3200",
       stagger: {
         amount: -0.3,
       },
