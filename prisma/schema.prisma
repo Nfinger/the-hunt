@@ -1,0 +1,46 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id String @id @default(cuid())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  hasOnboarded Boolean @default(false)
+}
+
+model Progress {
+  id    String @id @default(cuid())
+  title String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  locations Location[]
+
+  currentStep Int @default(0)
+}
+
+model Location {
+  id   String @id @default(cuid())
+  name String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  lattitude Float
+  longitude Float
+
+  hasVisited Boolean @default(false)
+
+  clue       String    @unique
+  Progress   Progress? @relation(fields: [progressId], references: [id])
+  progressId String?
+}
