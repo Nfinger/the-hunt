@@ -10,11 +10,6 @@ import { gsap } from "gsap";
 //   });
 // };
 
-const randomNumber = (min, max) =>
-  Math.floor(Math.random() * (max - min + 1) + min);
-
-const DOM = {};
-
 class Intro {
   constructor(el) {
     this.q = gsap.utils.selector(el);
@@ -80,10 +75,6 @@ class Intro {
     // this.DOM.enterCtrl.addEventListener("mouseenter", this.enterMouseEnterEv);
     // this.DOM.enterCtrl.addEventListener("mouseleave", this.enterMouseLeaveEv);
     // this.DOM.enterCtrl.addEventListener("click", this.enterClickEv);
-    console.log(
-      "🚀 ~ file: animatedText.js ~ line 88 ~ Intro ~ initEvents ~ this.DOM.enterCtrl",
-      this.DOM.enterCtrl
-    );
   }
   // initial (intro) animation
   start() {
@@ -122,6 +113,7 @@ class Intro {
     gsap.to(this.DOM.circleText, {
       delay: 2,
       duration: 6,
+      repeat: 99,
       ease: "power4",
       rotate: "+=180",
       stagger: {
