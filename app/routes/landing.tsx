@@ -1,7 +1,7 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { useNavigate } from "@remix-run/react";
 import { useEffect } from "react";
-import { start } from "~/components/animatedText";
+const { start } = require("~/components/animatedText");
 
 export const loader: LoaderFunction = async ({ request }) => {
   return null;
@@ -22,24 +22,22 @@ export default function Landing() {
         height="100%"
         viewBox="0 0 1400 1400"
       >
-        <def>
-          <path
-            id="circle-1"
-            d="M250,700.5A450.5,450.5 0 1 11151,700.5A450.5,450.5 0 1 1250,700.5"
-          />
-          <path
-            id="circle-2"
-            d="M382,700.5A318.5,318.5 0 1 11019,700.5A318.5,318.5 0 1 1382,700.5"
-          />
-          <path
-            id="circle-3"
-            d="M487,700.5A213.5,213.5 0 1 1914,700.5A213.5,213.5 0 1 1487,700.5"
-          />
-          <path
-            id="circle-4"
-            d="M567.5,700.5A133,133 0 1 1833.5,700.5A133,133 0 1 1567.5,700.5"
-          />
-        </def>
+        <path
+          id="circle-1"
+          d="M250,700.5A450.5,450.5 0 1 11151,700.5A450.5,450.5 0 1 1250,700.5"
+        />
+        <path
+          id="circle-2"
+          d="M382,700.5A318.5,318.5 0 1 11019,700.5A318.5,318.5 0 1 1382,700.5"
+        />
+        <path
+          id="circle-3"
+          d="M487,700.5A213.5,213.5 0 1 1914,700.5A213.5,213.5 0 1 1487,700.5"
+        />
+        <path
+          id="circle-4"
+          d="M567.5,700.5A133,133 0 1 1833.5,700.5A133,133 0 1 1567.5,700.5"
+        />
         <text className="circles__text circles__text--1">
           <textPath
             className="circles__text-path"

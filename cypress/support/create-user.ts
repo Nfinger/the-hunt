@@ -19,16 +19,11 @@ async function createAndLogin(email: string) {
     throw new Error("All test emails must end in @example.com");
   }
 
-  const user = await createUser(email, "myreallystrongpassword");
+  await createUser(email);
 
-  const response = await createUserSession({
-    request: new Request(""),
-    userId: user.id,
-    remember: false,
-    redirectTo: "/",
-  });
+  const response = await createUserSession(new Request(""));
 
-  const cookieValue = response.headers.get("Set-Cookie");
+  const cookieValue = response.headers["Set-Cookie"];
   if (!cookieValue) {
     throw new Error("Cookie missing from createUserSession response");
   }
