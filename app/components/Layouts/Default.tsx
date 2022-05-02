@@ -5,7 +5,7 @@ function DefaultLayout({ children }: { children: ReactElement }) {
   return (
     <>
       <Flex
-        height="90vh"
+        height={["90vh", "100vh", "100vh", "100vh"]}
         flexDirection="column"
         justify="center"
         align="center"
