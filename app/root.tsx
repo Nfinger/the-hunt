@@ -31,7 +31,7 @@ type LoaderData = {
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "New Remix App",
+  title: "The Hunt",
   viewport: "width=device-width,initial-scale=1",
 });
 
