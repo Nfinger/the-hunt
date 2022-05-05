@@ -9,7 +9,6 @@ function DefaultLayout({ children }: { children: ReactElement }) {
         flexDirection="column"
         justify="center"
         align="center"
-        mx="10vw"
       >
         {children}
       </Flex>

@@ -23,8 +23,6 @@ model Progress {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  locations Location[]
-
   currentStep Int @default(0)
 }
 
@@ -35,12 +33,12 @@ model Location {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  lattitude Float
-  longitude Float
+  order Int @default(0)
 
-  hasVisited Boolean @default(false)
+  hasBeenGuessed Boolean @default(false)
+  hasBeenVisited Boolean @default(false)
 
-  clue       String    @unique
-  Progress   Progress? @relation(fields: [progressId], references: [id])
+  clue       String  @unique
+  boldWord   String  @default("")
   progressId String?
 }

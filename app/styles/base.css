@@ -350,3 +350,47 @@ a:focus-visible {
 		text-align: left;
 	}
 }
+
+
+
+/* Swiper */
+.swiper-container {
+	width: 100%;
+}
+
+.swiper-slide {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	flex-direction: column;
+}
+
+.swiper-slide-prev {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	flex-direction: column;
+}
+.swiper-slide-active {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	flex-direction: column;
+}
+
+.swiper-button-prev {
+	display: none;
+}
+
+.swiper-button-next {
+	display: none;
+}
