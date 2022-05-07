@@ -18,7 +18,7 @@ model User {
 
 model Progress {
   id    String @id @default(cuid())
-  title String
+  title String @unique
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -28,7 +28,7 @@ model Progress {
 
 model Location {
   id   String @id @default(cuid())
-  name String
+  name String @unique
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -38,7 +38,7 @@ model Location {
   hasBeenGuessed Boolean @default(false)
   hasBeenVisited Boolean @default(false)
 
-  clue       String
+  clue       String  @unique
   boldWord   String  @default("")
   progressId String?
 }
