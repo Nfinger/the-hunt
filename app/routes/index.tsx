@@ -106,7 +106,6 @@ export default function Index() {
   const transition = useTransition();
 
   const { user, locations, progress } = data;
-  console.log("🚀 ~ file: index.tsx ~ line 105 ~ Index ~ user", user);
 
   const [activeIndex, setActiveIndex] = React.useState(
     progress?.currentStep ?? 0
@@ -128,7 +127,7 @@ export default function Index() {
 
   if (!progress || !locations) return null;
 
-  if (isBefore(new Date(), new Date("2022-05-06T17:00:00"))) {
+  if (isBefore(new Date(), new Date("2022-05-07T17:00:00"))) {
     return <CountdownPage />;
   }
 
