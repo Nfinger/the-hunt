@@ -14,7 +14,7 @@ async function seed() {
     },
   });
 
-  await prisma.location.createMany({
+  const locations = await prisma.location.createMany({
     data: [
       {
         name: "Shojo",
@@ -42,6 +42,7 @@ async function seed() {
       },
     ],
   });
+  console.log("🚀 ~ file: seed.ts ~ line 45 ~ seed ~ locations", locations);
 }
 
 seed()
