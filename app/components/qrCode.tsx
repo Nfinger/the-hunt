@@ -21,6 +21,14 @@ const getPosition = (
       top = "0";
       left = "-50px";
       break;
+    case "bottom-left":
+      bottom = "0";
+      left = "-50px";
+      break;
+    case "bottom-right":
+      bottom = "0";
+      right = "-50px";
+      break;
     default:
       top = "0";
       left = "0";

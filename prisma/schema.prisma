@@ -14,6 +14,8 @@ model User {
   updatedAt DateTime @updatedAt
 
   hasOnboarded Boolean @default(false)
+
+  images String[]
 }
 
 model Progress {

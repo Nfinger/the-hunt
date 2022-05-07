@@ -21,11 +21,14 @@ import {
 } from "~/models/location.server";
 import { QrCode } from "~/components/qrCode";
 import { Steps } from "~/components/Steps";
-import { Location } from "@prisma/client";
+import type { Location } from "@prisma/client";
 import { isBefore } from "date-fns";
 import CountdownPage from "~/components/Countdown";
+import { uploadUserImage } from "~/models/user.server";
+import { getUser } from "~/session.server";
 
 type LoaderData = {
+  user: Awaited<ReturnType<typeof getUser>>;
   progress: Awaited<ReturnType<typeof getProgress>>;
   locations: Awaited<ReturnType<typeof getLocations>>;
 };
@@ -59,6 +62,7 @@ const getQRPosition = (index: number) => {
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
+  const userId = formData.get("userId");
   const locationId = formData.get("locationId");
   const guess = formData.get("guess");
   const location = formData.get("location");
@@ -68,7 +72,12 @@ export const action: ActionFunction = async ({ request }) => {
 
   if (hasBeenVisited) {
     await updateHasVisited(locationId as string);
-    await updateProgress();
+    await uploadUserImage(
+      userId as string,
+      parseInt(index as string),
+      photo as string
+    );
+    await updateProgress(parseInt(index as string) + 1);
     return json<ActionData>({
       correct: true,
       index: parseInt(index as string) + 1,
@@ -85,9 +94,10 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
+  const user = await getUser(request);
   const progress = await getProgress();
   const locations = await getLocations();
-  return json<LoaderData>({ progress, locations });
+  return json<LoaderData>({ user, progress, locations });
 };
 
 export default function Index() {
@@ -95,12 +105,15 @@ export default function Index() {
   const actionData = useActionData() as ActionData;
   const transition = useTransition();
 
-  const { locations, progress } = data;
+  const { user, locations, progress } = data;
+  console.log("🚀 ~ file: index.tsx ~ line 105 ~ Index ~ user", user);
 
   const [activeIndex, setActiveIndex] = React.useState(
     progress?.currentStep ?? 0
   );
-  const [locationPhoto, setLocationPhoto] = React.useState("");
+  const [locationPhoto, setLocationPhoto] = React.useState(
+    user?.images[activeIndex]
+  );
   const ref = React.useRef<HTMLFormElement>(null);
 
   React.useEffect(() => {
@@ -109,12 +122,13 @@ export default function Index() {
     }
     if (actionData?.index) {
       setActiveIndex(actionData.index);
+      setLocationPhoto("");
     }
   }, [transition]);
 
   if (!progress || !locations) return null;
 
-  if (isBefore(new Date(), new Date("2022-05-07T17:00:00"))) {
+  if (isBefore(new Date(), new Date("2022-05-06T17:00:00"))) {
     return <CountdownPage />;
   }
 
@@ -122,6 +136,7 @@ export default function Index() {
     const currentStep = progress?.currentStep ?? 0;
     if (index <= currentStep) {
       setActiveIndex(index);
+      setLocationPhoto(user?.images[index]);
     }
   };
 
@@ -146,6 +161,14 @@ export default function Index() {
           )}
         </Text>
         <Form method="post" ref={ref}>
+          <input
+            type="text"
+            id="userId"
+            name="userId"
+            value={user?.id}
+            readOnly
+            hidden
+          />
           <input
             type="text"
             id="locationId"
@@ -193,6 +216,14 @@ export default function Index() {
       content = locationPhoto ? (
         <Form method="post" ref={ref}>
           <img src={locationPhoto} />
+          <input
+            type="text"
+            id="userId"
+            name="userId"
+            value={user?.id}
+            readOnly
+            hidden
+          />
           <input
             type="text"
             id="locationId"

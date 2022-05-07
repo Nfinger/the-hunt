@@ -8,13 +8,13 @@ export function getProgress() {
   return prisma.progress.findFirst({});
 }
 
-export function updateProgress() {
+export function updateProgress(currentStep: number) {
   return prisma.progress.update({
     where: {
       title: "The Hunt",
     },
     data: {
-      currentStep: { increment: 1 },
+      currentStep,
     },
   });
 }
