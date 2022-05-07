@@ -127,10 +127,6 @@ export default function Index() {
 
   if (!progress || !locations) return null;
 
-  if (isBefore(new Date(), new Date("2022-05-07T17:00:00-05:00"))) {
-    return <CountdownPage />;
-  }
-
   const handleClick = (index: number) => {
     const currentStep = progress?.currentStep ?? 0;
     if (index <= currentStep) {
