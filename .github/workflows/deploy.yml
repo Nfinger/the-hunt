@@ -151,8 +151,6 @@ jobs:
 
       - name: 🐳 Docker build
         uses: docker/build-push-action@v2
-        env:
-          DATABASE_URL: "postgres://the_hunt_b886:T0gV6pNjuP5hsSp@top2.nearest.of.the-hunt-b886-db.internal:5432/the_hunt_b886"
         with:
           context: .
           push: true
@@ -163,6 +161,8 @@ jobs:
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
 
       - name: 🛠 Setup Database
+        env:
+          DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
         run: npx prisma migrate reset --force
 
       # This ugly bit is necessary if you don't want your cache to grow forever
